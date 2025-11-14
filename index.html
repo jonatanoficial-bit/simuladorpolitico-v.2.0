@@ -3,30 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Simulador Político Deluxe</title>
+  <title>Simulador Político 3.0</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css" />
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- Fade cinematográfico -->
   <div id="cineFade" class="fade hidden"></div>
 
   <!-- TELA INICIAL -->
   <section id="screenIntro" class="screen screen--intro show">
     <div class="intro-glass glass">
-      <h1 class="intro-title">SIMULADOR POLÍTICO</h1>
-      <p class="intro-sub">Do bairro ao palácio. Você decide o destino do país.</p>
-      <button id="btnStart" class="btn btn-gold btn-xl" type="button">INICIAR</button>
+      <h1 class="intro-title">SIMULADOR POLÍTICO 3.0</h1>
+      <p class="intro-sub">
+        Do bairro ao palácio. Construa sua carreira, enfrente crises e vença eleições.
+      </p>
+      <button id="btnStart" class="btn btn-gold btn-xl">INICIAR CARREIRA</button>
+      <p class="intro-foot">Versão 3.0 • Modo carreira política realista</p>
     </div>
-    <div class="intro-foot">Tema preto & dourado • Versão Deluxe</div>
   </section>
 
-  <!-- SETUP -->
+  <!-- TELA DE CONFIGURAÇÃO -->
   <section id="screenSetup" class="screen">
     <div class="setup-wrapper glass">
       <h2>Crie seu perfil político</h2>
+      <p class="setup-sub">
+        Escolha partido, estado e cidade. Esses dados aparecerão em toda sua trajetória.
+      </p>
       <div class="setup-grid">
         <div>
           <label for="selParty">Partido</label>
@@ -41,54 +50,79 @@
           <input id="inpCity" placeholder="Digite a cidade" />
         </div>
       </div>
-      <button id="btnBegin" class="btn btn-gold btn-lg" type="button">Iniciar mandato</button>
+      <button id="btnBegin" class="btn btn-gold btn-lg">Iniciar mandato como Vereador</button>
     </div>
   </section>
 
-  <!-- JOGO -->
+  <!-- TELA PRINCIPAL -->
   <section id="screenGame" class="screen screen-bg">
+
+    <!-- HUD SUPERIOR -->
     <header class="hud glass">
       <div class="hud-left">
-        <img id="partyLogo" class="party-logo" src="" alt="Logo do partido">
+        <img id="partyLogo" class="party-logo" src="" alt="Logo do partido" />
         <div>
-          <div class="hud-office" id="hudOffice"></div>
-          <div class="hud-location" id="hudLocation"></div>
+          <div id="hudOffice" class="hud-office">Vereador</div>
+          <div id="hudLocation" class="hud-location">Cidade - Estado</div>
+          <div id="hudTraits" class="hud-traits">
+            Carisma <span id="traitCarisma">50</span> •
+            Técnica <span id="traitTecnica">50</span> •
+            Negociação <span id="traitNegociacao">50</span> •
+            Ética <span id="traitEtica">50</span>
+          </div>
         </div>
       </div>
+
       <div class="hud-center">
-        <div class="progress3d"><div class="progress3d-bar" id="barProgress"><span id="txtProgress">0%</span></div></div>
+        <div class="progress3d">
+          <div id="barProgress" class="progress3d-bar">
+            <span id="txtProgress">0%</span>
+          </div>
+        </div>
         <div class="hud-pop-row">
           <div class="pop-chip"><span id="popPeople">50%</span> Povo</div>
           <div class="pop-chip"><span id="popMedia">50%</span> Mídia</div>
           <div class="pop-chip"><span id="popParty">50%</span> Partido</div>
         </div>
       </div>
+
       <div class="hud-right">
-        <button id="btnSave" class="btn btn-icon btn-gold" title="Salvar"><span class="ico ico-save"></span></button>
-        <button id="btnHome" class="btn btn-icon" title="Início"><span class="ico ico-home"></span></button>
+        <button id="btnSave" class="btn btn-icon btn-gold" title="Salvar progresso">
+          💾
+        </button>
+        <button id="btnHome" class="btn btn-icon" title="Voltar ao início">
+          ⬅
+        </button>
       </div>
     </header>
 
+    <!-- LAYOUT PRINCIPAL -->
     <main class="layout">
+      <!-- AÇÕES -->
       <aside class="col-actions glass">
         <h3>Ações do cargo</h3>
-        <button id="btnAction1" class="action-btn">Votar projetos</button>
+        <button id="btnAction1" class="action-btn">Votar projetos de lei</button>
         <button id="btnAction2" class="action-btn">Propor novo projeto</button>
-        <button id="btnAction3" class="action-btn" title="Somente cargos executivos">Gerir crises & políticas</button>
-        <button id="btnAction4" class="action-btn" title="Necessita mérito e vitória eleitoral">Campanha para próximo cargo</button>
+        <button id="btnAction3" class="action-btn">Gerir crises (Executivo)</button>
+        <button id="btnAction4" class="action-btn">Campanha para próximo cargo</button>
       </aside>
 
+      <!-- CENTRO: CENÁRIO + TEXTO -->
       <section class="col-main glass">
-        <!-- HERO: imagem do cargo atual (fallback visual) -->
-        <div id="hero" class="hero"></div>
-
-        <h3 id="mainTitle">Situação atual</h3>
-        <div id="mainText" class="main-text"></div>
+        <div id="sceneImage" class="scene-image"></div>
+        <div class="col-main-text">
+          <h3 id="mainTitle">Início de mandato</h3>
+          <div id="mainText" class="main-text">
+            Bem-vindo ao seu mandato. Use as ações à esquerda para construir sua carreira.
+          </div>
+        </div>
       </section>
 
+      <!-- FEED / GRUPOS -->
       <aside class="col-feed glass">
-        <h3>Noticiário</h3>
-        <div id="feed"></div>
+        <h3>Noticiário & Grupos sociais</h3>
+        <div id="groupsPanel" class="groups-panel"></div>
+        <div id="feed" class="feed"></div>
       </aside>
     </main>
   </section>
@@ -96,12 +130,12 @@
   <!-- MODAL -->
   <div id="modal" class="modal hidden">
     <div class="modal-box glass">
-      <div class="modal-title" id="modalTitle"></div>
-      <div class="modal-body" id="modalBody"></div>
-      <div class="modal-actions" id="modalActions"></div>
+      <div id="modalTitle" class="modal-title"></div>
+      <div id="modalBody" class="modal-body"></div>
+      <div id="modalActions" class="modal-actions"></div>
     </div>
   </div>
 
-  <script src="assets/game.js"></script>
+  <script src="game.js"></script>
 </body>
 </html>
